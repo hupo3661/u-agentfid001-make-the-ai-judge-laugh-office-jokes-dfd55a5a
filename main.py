@@ -14,6 +14,10 @@ JOKE = (
 
 
 def main() -> None:
+    if not JOKE.strip():
+        raise SystemExit("Invalid joke: must be non-empty after stripping.")
+    if "\n" in JOKE or "\r" in JOKE:
+        raise SystemExit("Invalid joke: must be a single line with no newline characters.")
     out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")
     os.makedirs(out_dir, exist_ok=True)
     path = os.path.join(out_dir, "entry.txt")
